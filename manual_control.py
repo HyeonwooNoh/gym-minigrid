@@ -43,23 +43,22 @@ def main():
             sys.exit(0)
 
         action = 0
-
         if keyName == 'LEFT':
-            action = env.actions.left
+            action = env.std_actions.left
         elif keyName == 'RIGHT':
-            action = env.actions.right
+            action = env.std_actions.right
         elif keyName == 'UP':
-            action = env.actions.forward
+            action = env.std_actions.forward
 
         elif keyName == 'SPACE':
-            action = env.actions.toggle
+            action = env.std_actions.toggle
         elif keyName == 'PAGE_UP':
-            action = env.actions.pickup
+            action = env.std_actions.pickup
         elif keyName == 'PAGE_DOWN':
-            action = env.actions.drop
+            action = env.std_actions.drop
 
         elif keyName == 'RETURN':
-            action = env.actions.done
+            action = env.std_actions.done
 
         else:
             print("unknown key %s" % keyName)

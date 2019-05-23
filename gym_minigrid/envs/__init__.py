@@ -11,6 +11,7 @@ from gym_minigrid.envs.unlock import *
 from gym_minigrid.envs.unlockpickup import *
 from gym_minigrid.envs.blockedunlockpickup import *
 from gym_minigrid.envs.playground_v0 import *
+from gym_minigrid.envs.random_dynamics import *
 from gym_minigrid.envs.redbluedoors import *
 from gym_minigrid.envs.obstructedmaze import *
 from gym_minigrid.envs.memory import *

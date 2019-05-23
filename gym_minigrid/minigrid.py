@@ -675,6 +675,7 @@ class MiniGridEnv(gym.Env):
 
         # Action enumeration for this environment
         self.actions = MiniGridEnv.Actions
+        self.std_actions = MiniGridEnv.Actions
 
         # Actions are discrete integer values
         self.action_space = spaces.Discrete(len(self.actions))
