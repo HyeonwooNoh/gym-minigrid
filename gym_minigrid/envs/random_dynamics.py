@@ -38,6 +38,7 @@ class RandomDynamicsEnv(MiniGridEnv):
         size=8,
         agent_start_pos=(1,1),
         agent_start_dir=0,
+        random_dynamics=True,
         train=True,
     ):
         self.agent_start_pos = agent_start_pos
@@ -47,6 +48,7 @@ class RandomDynamicsEnv(MiniGridEnv):
         else:
             self.action_table_index = ACTION_SEMANTICS_ALL_INDEX_TEST
         self._i = 0
+        self._random_dynamics = random_dynamics
 
         super().__init__(
             grid_size=size,
@@ -65,7 +67,8 @@ class RandomDynamicsEnv(MiniGridEnv):
 
     def _gen_grid(self, width, height):
         # Sample action semantic (random dynamics)
-        self._sample_action_semantic()
+        if self._random_dynamics:
+            self._sample_action_semantic()
 
         # Create an empty grid
         self.grid = Grid(width, height)
@@ -90,17 +93,28 @@ class RandomDynamicsEnv5x5(RandomDynamicsEnv):
     def __init__(self):
         super().__init__(size=5, agent_start_pos=None)
 
+class RandomDynamicsEnv7x7Normal(RandomDynamicsEnv):
+    def __init__(self):
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=False)
+
 class RandomDynamicsEnv7x7Train(RandomDynamicsEnv):
     def __init__(self):
-        super().__init__(size=7, agent_start_pos=None, train=True)
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=True)
 
 class RandomDynamicsEnv7x7Test(RandomDynamicsEnv):
     def __init__(self):
-        super().__init__(size=7, agent_start_pos=None, train=False)
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=False)
 
 register(
     id='MiniGrid-RandomDynamics-5x5-v0',
     entry_point='gym_minigrid.envs:RandomDynamicsEnv5x5'
+)
+register(
+    id='MiniGrid-RandomDynamics-7x7-normal-v0',
+    entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7Normal'
 )
 register(
     id='MiniGrid-RandomDynamics-7x7-train-v0',
