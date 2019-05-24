@@ -61,7 +61,7 @@ class RandomDynamicsEnv(MiniGridEnv):
         action_table = ACTION_SEMANTICS_ALL[self.action_table_index[self._i]]
         self.actions=Actions(action_table)
         self._i += 1
-        if self._i > len(self.action_table_index):
+        if self._i >= len(self.action_table_index):
             np.random.shuffle(self.action_table_index)
             self._i = 0
 
