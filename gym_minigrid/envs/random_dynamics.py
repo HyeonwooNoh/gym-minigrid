@@ -45,8 +45,10 @@ class RandomDynamicsEnv(MiniGridEnv):
         self.agent_start_dir = agent_start_dir
         if train:
             self.action_table_index = ACTION_SEMANTICS_ALL_INDEX_TRAIN
+            np.random.shuffle(self.action_table_index)
         else:
             self.action_table_index = ACTION_SEMANTICS_ALL_INDEX_TEST
+            np.random.shuffle(self.action_table_index)
         self._i = 0
         self._random_dynamics = random_dynamics
 
