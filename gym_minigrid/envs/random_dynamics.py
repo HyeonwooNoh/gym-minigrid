@@ -40,15 +40,17 @@ class RandomDynamicsEnv(MiniGridEnv):
         agent_start_dir=0,
         random_dynamics=True,
         train=True,
+        max_n=None,
     ):
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
         if train:
             self.action_table_index = ACTION_SEMANTICS_ALL_INDEX_TRAIN
-            np.random.shuffle(self.action_table_index)
         else:
             self.action_table_index = ACTION_SEMANTICS_ALL_INDEX_TEST
-            np.random.shuffle(self.action_table_index)
+        if max_n is not None:
+            self.action_table_index = self.action_table_index[:max_n]
+        np.random.shuffle(self.action_table_index)
         self._i = 0
         self._random_dynamics = random_dynamics
 
@@ -105,6 +107,26 @@ class RandomDynamicsEnv7x7Train(RandomDynamicsEnv):
         super().__init__(size=7, agent_start_pos=None,
                          random_dynamics=True, train=True)
 
+class RandomDynamicsEnv7x7TrainN2(RandomDynamicsEnv):
+    def __init__(self):
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=True, max_n=2)
+
+class RandomDynamicsEnv7x7TrainN3(RandomDynamicsEnv):
+    def __init__(self):
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=True, max_n=3)
+
+class RandomDynamicsEnv7x7TrainN5(RandomDynamicsEnv):
+    def __init__(self):
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=True, max_n=5)
+
+class RandomDynamicsEnv7x7TrainN10(RandomDynamicsEnv):
+    def __init__(self):
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=True, max_n=10)
+
 class RandomDynamicsEnv7x7Test(RandomDynamicsEnv):
     def __init__(self):
         super().__init__(size=7, agent_start_pos=None,
@@ -121,6 +143,22 @@ register(
 register(
     id='MiniGrid-RandomDynamics-7x7-train-v0',
     entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7Train'
+)
+register(
+    id='MiniGrid-RandomDynamics-7x7-train-n2-v0',
+    entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7TrainN2'
+)
+register(
+    id='MiniGrid-RandomDynamics-7x7-train-n3-v0',
+    entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7TrainN3'
+)
+register(
+    id='MiniGrid-RandomDynamics-7x7-train-n5-v0',
+    entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7TrainN5'
+)
+register(
+    id='MiniGrid-RandomDynamics-7x7-train-n10-v0',
+    entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7TrainN10'
 )
 register(
     id='MiniGrid-RandomDynamics-7x7-test-v0',
