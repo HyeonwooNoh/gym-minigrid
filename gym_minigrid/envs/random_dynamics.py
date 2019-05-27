@@ -137,6 +137,11 @@ class RandomDynamicsEnv7x7TrainN40(RandomDynamicsEnv):
         super().__init__(size=7, agent_start_pos=None,
                          random_dynamics=True, train=True, max_n=40)
 
+class RandomDynamicsEnv7x7TrainN80(RandomDynamicsEnv):
+    def __init__(self):
+        super().__init__(size=7, agent_start_pos=None,
+                         random_dynamics=True, train=True, max_n=80)
+
 class RandomDynamicsEnv7x7Test(RandomDynamicsEnv):
     def __init__(self):
         super().__init__(size=7, agent_start_pos=None,
@@ -177,6 +182,10 @@ register(
 register(
     id='MiniGrid-RandomDynamics-7x7-train-n40-v0',
     entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7TrainN40'
+)
+register(
+    id='MiniGrid-RandomDynamics-7x7-train-n80-v0',
+    entry_point='gym_minigrid.envs:RandomDynamicsEnv7x7TrainN80'
 )
 register(
     id='MiniGrid-RandomDynamics-7x7-test-v0',
